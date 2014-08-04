@@ -1,7 +1,7 @@
 forecastio
 ==========
 
-[![Build Status](https://travis-ci.org/soplakanets/node-forecastio.svg?branch=master)](https://travis-ci.org/soplakanets/node-forecastio)
+[![Build Status](https://travis-ci.org/soplakanets/node-forecastio.svg?branch=master)](https://travis-ci.org/soplakanets/node-forecastio) [![Dependency Status](https://david-dm.org/soplakanets/node-forecastio.png)](https://david-dm.org/soplakanets/node-forecastio)
 
 A node.js client library for [Forecast.io API](https://developer.forecast.io).
 
@@ -42,7 +42,7 @@ forecastIo.timeMachine('51.506', '-0.127', '2008-01-01T00:00:01Z', function(err,
 
 ### Request Options
 Both `#forecast()` and `#timeMachine()` methods support passing additional options.
-*Below are some example, for all options consult [Forecast.IO API documentation](https://developer.forecast.io/docs/v2).*
+*Below are some examples, for all options consult [Forecast.IO API documentation](https://developer.forecast.io/docs/v2).*
 
 
 Example of requesting ad forecast in Si(metric) units with only 'daily' fields:
@@ -58,7 +58,7 @@ forecastIo.forecast('49.844', '24.028', options, function(err, data) {
 });
 ```
 
-"Time Machine" request in Si units and localized in Italian:
+Another example, a "Time Machine" request in Si units and localized in Italian:
 
 ```javascript
 var options = {
