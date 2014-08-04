@@ -47,7 +47,7 @@ ForecastIo.prototype.makeRequest = function(url, options, callback) {
   request.get({uri: url, qs: options}, function(err, res, body) {
     if (err) return callback(err);
     if (res.statusCode !== 200) {
-      return callback(new ForecastIoError(res.request.uri.href, res.statusCode, body));
+      return callback(new ForecastIoError('Request failed', res.request.uri.href, res.statusCode, body));
     }
 
     var data;
@@ -62,10 +62,18 @@ ForecastIo.prototype.makeRequest = function(url, options, callback) {
 };
 
 
-function ForecastIoError(url, statusCode, body) {
+function ForecastIoError(message, url, statusCode, body) {
   Error.call(this);
+  this.message = message;
+  this.name = 'ForecastIoError';
   Error.captureStackTrace(this, arguments.callee);
   this.request = 'GET ' + url;
+
+  // Try to parse error response's body, since it's most probably JSON
+  try {
+    body = JSON.parse(body)
+  } catch(e) {}
+
   this.response = {
     statusCode: statusCode,
     body: body
@@ -74,7 +82,8 @@ function ForecastIoError(url, statusCode, body) {
 util.inherits(ForecastIoError, Error);
 
 ForecastIoError.prototype.toString = function() {
-  return "ForecastIoError: " + JSON.stringify({
+  return this.name + ": " + JSON.stringify({
+    message: this.mesage,
     request: this.request,
     response: this.response
   }, null, 2);
