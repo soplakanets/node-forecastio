@@ -1,0 +1,30 @@
+{
+  "name": "forecastio",
+  "version": "0.1.0",
+  "description": "node.js client for Forecast.io API",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha -R spec -s 1500 -t 3000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/soplakanets/node-forecastio.git"
+  },
+  "keywords": [
+    "weather",
+    "forecast",
+    "forecast.io"
+  ],
+  "author": "Serhiy Oplakanets <serhiy@oplakanets.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/soplakanets/node-forecastio/issues"
+  },
+  "homepage": "https://github.com/soplakanets/node-forecastio",
+  "dependencies": {
+    "request": "^2.39.0"
+  },
+  "devDependencies": {
+    "mocha": "^1.21.3"
+  }
+}
