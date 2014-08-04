@@ -1,0 +1,6 @@
+language: node_js
+node_js:
+- '0.11'
+- '0.10'
+env:
+  secure: HXKI+Z6oDMXVd1+2de7xz87bJOUwfk7q2hyRbXK1dzjps7GWhki2l7bB0gW9HzM2g/m7m88X8TWh/sq8q6n8RjiOfkdtQXK1q/GCNEdOUgpyibhvMYg9gvDb1a3jF220fCkigOUXmf4FTjlxvWUm5GezPyZK0G80FnglqAvz2cA=

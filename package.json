@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "description": "A node.js wrapper for Forecast.io API",
   "main": "index.js",
+  "engines": {
+    "node" : ">=0.10 <0.12"
+  },
   "scripts": {
     "test": "mocha -R spec -s 1500 -t 3000"
   },
