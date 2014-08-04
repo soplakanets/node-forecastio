@@ -1,6 +1,4 @@
 var assert      = require('assert');
-var async       = require('async');
-var _           = require('lodash');
 var ForecastIo  = require('../');
 
 

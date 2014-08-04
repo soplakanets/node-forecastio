@@ -63,6 +63,8 @@ ForecastIo.prototype.makeRequest = function(url, options, callback) {
 
 
 function ForecastIoError(url, statusCode, body) {
+  Error.call(this);
+  Error.captureStackTrace(this, arguments.callee);
   this.request = 'GET ' + url;
   this.response = {
     statusCode: statusCode,
