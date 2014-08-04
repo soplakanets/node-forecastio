@@ -1,4 +1,8 @@
-# forecastio
+forecastio
+==========
+
+[![Build Status](https://travis-ci.org/soplakanets/node-forecastio.svg?branch=master)](https://travis-ci.org/soplakanets/node-forecastio)
+
 A node.js client library for [Forecast.io API](https://developer.forecast.io).
 
 For explanation and more detailed info about endpoints and response format see [Forecast.IO API documentation](https://developer.forecast.io/docs/v2)
