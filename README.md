@@ -1,5 +1,5 @@
 # forecastio
-A node.js client for Forecast.io API.
+A node.js client library for [Forecast.io API](https://developer.forecast.io).
 
 For explanation and more detailed info about endpoints and response format see [Forecast.IO API documentation](https://developer.forecast.io/docs/v2)
 
@@ -12,7 +12,7 @@ npm install forecastio
 
 
 ## Usage
-Say you need a forecast for London, UK:
+Say you need a [forecast](https://developer.forecast.io/docs/v2#forecast_call) for London, UK:
 
 ```
 var ForecastIo = require('forecastio');
@@ -26,7 +26,7 @@ forecastIo.forecast('51.506', '-0.127', function(err, data) {
 
 
 ### "Time Machine" Requests
-Forecast.io also supports 'time machine' requests. Quoting official documentation you can make request for "60 years in the past to 10 years in the future" for many places. Example:
+Forecast.io also supports [Time Machine requests](https://developer.forecast.io/docs/v2#time_call). Quoting official documentation you can make request for "60 years in the past to 10 years in the future" for "many places". Example:
 
 ```
 // What was the weather like in London on January 1st 2008?
@@ -70,7 +70,7 @@ forecastIo.timeMachine('49.844', '24.028', '2008-01-01T00:00:01Z', options, func
 ## TODO
 - Request timeout
 - Logging (for debugging at least)
-- Smarter API methods (for exampel accept `Date` object in `#timeMachine()` and convert it to string)
+- Smarter API methods (accept `Date` object in `#timeMachine()` and convert it to string, for example)
 
 
 ## Contributing
