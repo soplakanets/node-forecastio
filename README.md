@@ -84,3 +84,9 @@ forecastIo.timeMachine('49.844', '24.028', '2008-01-01T00:00:01Z', options, func
   $ env FORECASTIO_API_KEY=`your_api_key` npm test
 
 * Create a pull request
+
+
+## Changelog
+
+#### 0.1.2
+- More informative error messages.
