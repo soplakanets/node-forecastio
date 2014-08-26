@@ -40,9 +40,9 @@ forecastIo.timeMachine('51.506', '-0.127', '2008-01-01T00:00:01Z', function(err,
 });
 ```
 
-### Request Options
+### API Options
 Both `#forecast()` and `#timeMachine()` methods support passing additional options.
-*Below are some examples, for all options consult [Forecast.IO API documentation](https://developer.forecast.io/docs/v2).*
+*Below are some examples, for all options consult [Options section of Forecast.IO API documentation](https://developer.forecast.io/docs/v2#options).*
 
 
 Example of requesting ad forecast in Si(metric) units with only 'daily' fields:
@@ -58,11 +58,11 @@ forecastIo.forecast('49.844', '24.028', options, function(err, data) {
 });
 ```
 
-Another example, a "Time Machine" request in Si units and localized in Italian:
+Another example, a "Time Machine" request in UK units and localized in Italian:
 
 ```javascript
 var options = {
-  units: 'si',
+  units: 'uk',
   lang:  'it'
 };
 forecastIo.timeMachine('49.844', '24.028', '2008-01-01T00:00:01Z', options, function(err, data) {
@@ -71,8 +71,18 @@ forecastIo.timeMachine('49.844', '24.028', '2008-01-01T00:00:01Z', options, func
 });
 ```
 
+### Request Timeout
+To set timeout for requests pass a timeout option to constructor, example:
+
+```javascript
+var forecastIo = new ForecastIo('<apiKey>', {timeout: 30*1000});
+```
+As a result all API request made with with this `forecastIo` instance will have a timeout of 30 seconds.
+
+Timeout option accepts time in milliseconds. If request will not finish in time - a callback will be fired with a timeout error.
+
+
 ## TODO
-- Request timeout
 - Logging (for debugging at least)
 - Smarter API methods (accept `Date` object in `#timeMachine()` and convert it to string, for example)
 
@@ -87,6 +97,9 @@ forecastIo.timeMachine('49.844', '24.028', '2008-01-01T00:00:01Z', options, func
 
 
 ## Changelog
+
+#### 0.2.0
+- Added `timeout` option
 
 #### 0.1.2
 - More informative error messages.

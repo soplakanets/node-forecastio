@@ -51,6 +51,17 @@ describe('ForecastIo', function() {
         done();
       });
     });
+
+    it('should handle timeouts', function(done) {
+      var opts = {timeout: 1}; // Any request with timeout of 1 ms will surely fail
+      var instance = new ForecastIo(process.env.FORECASTIO_API_KEY, opts);
+
+      instance.forecast('49.844', '24.028', function(err, _) {
+        assert.ok(err);
+        assert.equal("ETIMEDOUT", err.message);
+        done();
+      });
+    });
   })
 
   describe('#timeMachine()', function() {
@@ -90,6 +101,17 @@ describe('ForecastIo', function() {
         assert.ok(err.response);
         assert.ok(err.response.body);
         assert.equal(400, err.response.statusCode);
+        done();
+      });
+    });
+
+    it('should handle timeouts', function(done) {
+      var opts = {timeout: 1}; // Any request with timeout of 1 ms will surely fail
+      var instance = new ForecastIo(process.env.FORECASTIO_API_KEY, opts);
+
+      instance.timeMachine('49.844', '24.028', '2004-07-14T00:00:01Z', function(err, _) {
+        assert.ok(err);
+        assert.equal("ETIMEDOUT", err.message);
         done();
       });
     });
