@@ -1,19 +1,18 @@
-var request = require('request');
-var qs      = require('querystring');
-var util    = require('util');
+var request = require("request");
+var util    = require("util");
 
 
-defaultRequestOptions = {};
-allowedRequestOptions = ['timeout'];
+var defaultRequestOptions = {};
+var allowedRequestOptions = ["timeout"];
 
 function ForecastIo(apiKey, requestOptions) {
   this.requestOptions = this.checkOptions(requestOptions);
   this.apiKey = apiKey;
-  this.baseUrl = 'https://api.forecast.io/forecast/' + this.apiKey + '/';
+  this.baseUrl = "https://api.forecast.io/forecast/" + this.apiKey + "/";
 }
 
 ForecastIo.prototype.forecast = function(latitude, longitude, options, callback) {
-  if (typeof options === 'function') {
+  if (typeof options === "function") {
     callback = options;
     options = {};
   }
@@ -26,7 +25,7 @@ ForecastIo.prototype.forecast = function(latitude, longitude, options, callback)
 };
 
 ForecastIo.prototype.timeMachine = function(latitude, longitude, time, options, callback) {
-  if (typeof options === 'function') {
+  if (typeof options === "function") {
     callback = options;
     options = {};
   }
@@ -50,9 +49,9 @@ ForecastIo.prototype.checkOptions = function(userOptions) {
 };
 
 ForecastIo.prototype.buildUrl = function(latitude, longitude, time) {
-  var url = this.baseUrl + latitude + ',' + longitude;
-  if (typeof time !== 'undefined') {
-    url += ',' + time
+  var url = this.baseUrl + latitude + "," + longitude;
+  if (typeof time !== "undefined") {
+    url += "," + time;
   }
 
   return url;
@@ -82,7 +81,7 @@ ForecastIo.prototype.makeRequest = function(url, queryString, callback) {
 
 /** Represents API errors. */
 function ForecastIoAPIError(url, statusCode, body) {
-  // Try to parse error response's body, since it's most probably JSON
+  // Try to parse error response"s body, since it"s most probably JSON
   try {
     body = JSON.parse(body)
   } catch(e) {}
@@ -92,10 +91,10 @@ function ForecastIoAPIError(url, statusCode, body) {
     body: body
   };
   this.message = this._formatErrorMessage(body);
-  this.name = 'ForecastIoAPIError';
+  this.name = "ForecastIoAPIError";
   Error.call(this);
   Error.captureStackTrace(this, arguments.callee);
-  this.request = 'GET ' + url;
+  this.request = "GET " + url;
 }
 util.inherits(ForecastIoAPIError, Error);
 
