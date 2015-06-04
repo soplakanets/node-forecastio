@@ -2,6 +2,7 @@ forecastio
 ==========
 
 [![Build Status](https://travis-ci.org/soplakanets/node-forecastio.svg?branch=master)](https://travis-ci.org/soplakanets/node-forecastio) [![Dependency Status](https://david-dm.org/soplakanets/node-forecastio.png)](https://david-dm.org/soplakanets/node-forecastio)
+![Badge](https://img.shields.io/badge/has%20nifty%20badges-yes-green.svg)
 
 A node.js client library for [Forecast.io API](https://developer.forecast.io).
 
