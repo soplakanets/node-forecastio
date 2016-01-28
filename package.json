@@ -4,7 +4,7 @@
   "description": "A node.js wrapper for Forecast.io API",
   "main": "index.js",
   "engines": {
-    "node" : ">=0.10 <0.12"
+    "node": ">=0.10 <0.12"
   },
   "scripts": {
     "test": "mocha -R spec -s 1500 -t 3000"
@@ -25,7 +25,7 @@
   },
   "homepage": "https://github.com/soplakanets/node-forecastio",
   "dependencies": {
-    "request": "^2.40.0"
+    "request-promise": "^2.0.0"
   },
   "devDependencies": {
     "mocha": "^1.21.4"

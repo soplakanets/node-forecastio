@@ -1,9 +1,13 @@
-var request = require("request");
+var request = require("request-promise");
 var util    = require("util");
 
 
-var defaultRequestOptions = {};
-var allowedRequestOptions = ["timeout"];
+var DEFAULT_REQUEST_OPTIONS = {
+  json: true,
+  simple: false,
+  resolveWithFullResponse: true
+};
+var ALLOWED_REQUEST_OPTIONS = ["timeout"];
 
 function ForecastIo(apiKey, requestOptions) {
   this.requestOptions = this.checkOptions(requestOptions);
@@ -11,37 +15,26 @@ function ForecastIo(apiKey, requestOptions) {
   this.baseUrl = "https://api.forecast.io/forecast/" + this.apiKey + "/";
 }
 
-ForecastIo.prototype.forecast = function(latitude, longitude, options, callback) {
+ForecastIo.prototype.forecast = function(latitude, longitude, options) {
   if (typeof options === "function") {
     callback = options;
     options = {};
   }
 
   var url = this.buildUrl(latitude, longitude);
-  this.makeRequest(url, options, function(err, data) {
-    if (err) return callback(err);
-    return callback(null, data);
-  });
+  return this.makeRequest(url, options);
 };
 
-ForecastIo.prototype.timeMachine = function(latitude, longitude, time, options, callback) {
-  if (typeof options === "function") {
-    callback = options;
-    options = {};
-  }
-
+ForecastIo.prototype.timeMachine = function(latitude, longitude, time, options) {
   var url = this.buildUrl(latitude, longitude, time);
-  this.makeRequest(url, options, function(err, data) {
-    if (err) return callback(err);
-    return callback(null, data);
-  });
+  return this.makeRequest(url, options);
 };
 
 ForecastIo.prototype.checkOptions = function(userOptions) {
   if (typeof userOptions === "undefined")
-    return defaultRequestOptions;
-  var options = {};
-  allowedRequestOptions.forEach(function(optionName) {
+    return DEFAULT_REQUEST_OPTIONS;
+  var options = cloneObject(DEFAULT_REQUEST_OPTIONS);
+  ALLOWED_REQUEST_OPTIONS.forEach(function(optionName) {
     if (userOptions[optionName])
       options[optionName] = userOptions[optionName];
   });
@@ -57,35 +50,24 @@ ForecastIo.prototype.buildUrl = function(latitude, longitude, time) {
   return url;
 };
 
-ForecastIo.prototype.makeRequest = function(url, queryString, callback) {
+ForecastIo.prototype.makeRequest = function(url, queryString) {
   var requestOptions = this.requestOptions;
   requestOptions.uri = url;
   requestOptions.qs = queryString;
-  request.get(requestOptions, function(err, res, body) {
-    if (err) return callback(new ForecastIoError(err));
-    if (res.statusCode !== 200) {
-      return callback(new ForecastIoAPIError(res.request.uri.href, res.statusCode, body));
-    }
 
-    var data;
-    try {
-      data = JSON.parse(body);
-    } catch (e) {
-      return callback(e);
-    }
+  return request(requestOptions)
+    .then(function(response) {
+      if (response.statusCode != 200) {
+        throw new ForecastIoAPIError(url, response.statusCode, response.body);
+      }
 
-    callback(null, data);
-  });
+      return response.body;
+    })
 };
 
 
 /** Represents API errors. */
 function ForecastIoAPIError(url, statusCode, body) {
-  // Try to parse error response"s body, since it"s most probably JSON
-  try {
-    body = JSON.parse(body)
-  } catch(e) {}
-
   this.response = {
     statusCode: statusCode,
     body: body
@@ -113,14 +95,9 @@ ForecastIoAPIError.prototype._formatErrorMessage = function(body) {
 };
 
 
-/** Represents generic errors. Like timeouts, networking issues etc. */
-function ForecastIoError(cause) {
-  this.name = "ForecastIoError";
-  this.message = cause.message;
-  Error.call(this);
-  Error.captureStackTrace(this, arguments.callee);
+function cloneObject(obj) {
+  return JSON.parse(JSON.stringify(obj));
 }
-util.inherits(ForecastIoError, Error);
 
 
 module.exports = ForecastIo;
