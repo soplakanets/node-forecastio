@@ -23,8 +23,7 @@ Say you need a [forecast](https://developer.forecast.io/docs/v2#forecast_call) f
 var ForecastIo = require('forecastio');
 
 var forecastIo = new ForecastIo('<apiKey>');
-forecastIo.forecast('51.506', '-0.127', function(err, data) {
-  if (err) throw err;
+forecastIo.forecast('51.506', '-0.127').then(function(data) {
   console.log(JSON.stringify(data, null, 2));
 });
 ```
@@ -35,8 +34,7 @@ Forecast.io also supports [Time Machine requests](https://developer.forecast.io/
 
 ```javascript
 // What was the weather like in London on January 1st 2008?
-forecastIo.timeMachine('51.506', '-0.127', '2008-01-01T00:00:01Z', function(err, data) {
-  if (err) throw err;
+forecastIo.timeMachine('51.506', '-0.127', '2008-01-01T00:00:01Z').then(function(data) {
   console.log(JSON.stringify(data, null, 2));
 });
 ```
@@ -53,8 +51,7 @@ var options = {
   units: 'si',
   exclude: 'currently,hourly,flags'
 };
-forecastIo.forecast('49.844', '24.028', options, function(err, data) {
-  if (err) throw err;
+forecastIo.forecast('49.844', '24.028', options).then(function(data) {
   console.log(JSON.stringify(data, null, 2));
 });
 ```
@@ -66,7 +63,7 @@ var options = {
   units: 'uk',
   lang:  'it'
 };
-forecastIo.timeMachine('49.844', '24.028', '2008-01-01T00:00:01Z', options, function(err, data) {
+forecastIo.timeMachine('49.844', '24.028', '2008-01-01T00:00:01Z', options).then(function(data) {
   if (err) throw err;
   console.log(JSON.stringify(data, null, 2));
 });
@@ -98,6 +95,9 @@ Timeout option accepts time in milliseconds. If request will not finish in time 
 
 
 ## Changelog
+
+#### 1.0.0
+- Promises (For compatibility callbacks are still supported).
 
 #### 0.2.0
 - Added `timeout` option
