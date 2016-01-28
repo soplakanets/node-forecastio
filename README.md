@@ -64,7 +64,6 @@ var options = {
   lang:  'it'
 };
 forecastIo.timeMachine('49.844', '24.028', '2008-01-01T00:00:01Z', options).then(function(data) {
-  if (err) throw err;
   console.log(JSON.stringify(data, null, 2));
 });
 ```
