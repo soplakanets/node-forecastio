@@ -62,7 +62,22 @@ describe('ForecastIo', function() {
           assert.ok(err);
           assert.equal("Error: ETIMEDOUT", err.message);
         })
-    });
+    })
+
+    it('should support optional callbacks for success cases', function(done) {
+      forecastIo.forecast('49.844', '24.028', function(err, data) {
+        if (err) return done(err);
+        assert.ok(data);
+        done()
+      })
+    })
+
+    it('should support oldschool callbacks for error cases', function(done) {
+      forecastIo.forecast('foo', 'bar', {foo: 'bar'}, function(err) {
+        assert.ok(err);
+        done()
+      })
+    })
   })
 
   describe('#timeMachine()', function() {
@@ -116,5 +131,20 @@ describe('ForecastIo', function() {
           assert.equal("Error: ETIMEDOUT", err.message);
         });
     });
+
+    it('should support optional callbacks for success cases', function(done) {
+      forecastIo.timeMachine('49.844', '24.028', '2004-07-14T00:00:01Z', function(err, data) {
+        if (err) return done(err);
+        assert.ok(data);
+        done()
+      })
+    })
+
+    it('should support oldschool callbacks for error cases', function(done) {
+      forecastIo.timeMachine('foo', 'bar', 'foobar', function(err) {
+        assert.ok(err);
+        done()
+      })
+    })
   })
 })

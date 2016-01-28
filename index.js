@@ -15,19 +15,24 @@ function ForecastIo(apiKey, requestOptions) {
   this.baseUrl = "https://api.forecast.io/forecast/" + this.apiKey + "/";
 }
 
-ForecastIo.prototype.forecast = function(latitude, longitude, options) {
+ForecastIo.prototype.forecast = function(latitude, longitude, options, optionalCallback) {
   if (typeof options === "function") {
-    callback = options;
+    optionalCallback = options;
     options = {};
   }
 
   var url = this.buildUrl(latitude, longitude);
-  return this.makeRequest(url, options);
+  return this.makeRequest(url, options, optionalCallback);
 };
 
-ForecastIo.prototype.timeMachine = function(latitude, longitude, time, options) {
+ForecastIo.prototype.timeMachine = function(latitude, longitude, time, options, optionalCallback) {
+  if (typeof options === "function") {
+    optionalCallback = options;
+    options = {};
+  }
+
   var url = this.buildUrl(latitude, longitude, time);
-  return this.makeRequest(url, options);
+  return this.makeRequest(url, options, optionalCallback);
 };
 
 ForecastIo.prototype.checkOptions = function(userOptions) {
@@ -50,19 +55,29 @@ ForecastIo.prototype.buildUrl = function(latitude, longitude, time) {
   return url;
 };
 
-ForecastIo.prototype.makeRequest = function(url, queryString) {
+ForecastIo.prototype.makeRequest = function(url, queryString, optionalCallback) {
   var requestOptions = this.requestOptions;
   requestOptions.uri = url;
   requestOptions.qs = queryString;
 
-  return request(requestOptions)
+  var promise = request(requestOptions)
     .then(function(response) {
       if (response.statusCode != 200) {
         throw new ForecastIoAPIError(url, response.statusCode, response.body);
       }
 
       return response.body;
-    })
+    });
+
+  if (typeof(optionalCallback) !== "undefined") {
+    promise
+      .then(function(data) {
+        optionalCallback(null, data)
+      })
+      .catch(optionalCallback);
+  } else {
+    return promise;  
+  }  
 };
 
 
