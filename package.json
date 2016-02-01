@@ -1,10 +1,10 @@
 {
   "name": "forecastio",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A node.js wrapper for Forecast.io API",
   "main": "index.js",
   "engines": {
-    "node": ">=0.10 <0.12"
+    "node": ">=0.10 <=5.0"
   },
   "scripts": {
     "test": "mocha -R spec -s 1500 -t 3000"
