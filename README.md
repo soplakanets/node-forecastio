@@ -95,6 +95,9 @@ Timeout option accepts time in milliseconds. If request will not finish in time 
 
 ## Changelog
 
+#### 1.0.2
+- Fixed deprecation warnings.
+
 #### 1.0.0
 - Promises (For compatibility callbacks are still supported).
 
