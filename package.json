@@ -4,7 +4,7 @@
   "description": "A node.js wrapper for Forecast.io API",
   "main": "index.js",
   "engines": {
-    "node": ">=0.10 <=5.0"
+    "node": ">=0.10 <=6.2"
   },
   "scripts": {
     "test": "mocha -R spec -s 1500 -t 3000"
