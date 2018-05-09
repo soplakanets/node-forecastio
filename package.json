@@ -25,9 +25,10 @@
   },
   "homepage": "https://github.com/soplakanets/node-forecastio",
   "dependencies": {
-    "request-promise": "^3.0.0"
+    "request": "^2.85.0",
+    "request-promise": "^4.2.2"
   },
   "devDependencies": {
-    "mocha": "^2.5.3"
+    "mocha": "^5.1.1"
   }
 }
