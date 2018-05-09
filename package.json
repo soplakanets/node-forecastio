@@ -4,7 +4,7 @@
   "description": "A node.js wrapper for Forecast.io API",
   "main": "index.js",
   "engines": {
-    "node": ">=0.10 <=6.2"
+    "node": ">=4 <=10.1"
   },
   "scripts": {
     "test": "./node_modules/.bin/mocha -R spec -s 1500 -t 3000"
@@ -16,7 +16,9 @@
   "keywords": [
     "weather",
     "forecast",
-    "forecast.io"
+    "forecast.io",
+    "darksky",
+    "darksky.net"
   ],
   "author": "Serhiy Oplakanets <serhiy@oplakanets.com>",
   "license": "MIT",
