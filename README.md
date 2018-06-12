@@ -95,6 +95,10 @@ Timeout option accepts time in milliseconds. If request will not finish in time 
 
 ## Changelog
 
+#### 2.0.0
+- Dropped support for node < 4.x
+- Fixed deprecation warnings for dependencies.
+
 #### 1.0.2
 - Fixed deprecation warnings.
 
